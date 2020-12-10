@@ -15,7 +15,11 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Todo addTodo(Todo todo) {
+    public Todo create(Todo todo) {
         return todoRepository.save(todo);
+    }
+
+    public Todo getById(String s) {
+        return null;
     }
 }

@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +39,26 @@ public class TodoServiceTest {
     }
 
     @Test
-    public void should_return_new_todo_when_addTodo_given_new_todo() {
+    public void should_return_new_todo_when_create_given_new_todo() {
         final Todo task = new Todo("task2", false, new ArrayList<>());
         task.setId("1");
 
         when(todoRepository.save(task)).thenReturn(task);
 
-        Todo actual = todoService.addTodo(task);
+        Todo actual = todoService.create(task);
+
+        assertEquals(task, actual);
+
+    }
+
+    @Test
+    public void should_return_specific_todo_when_getById_given_todoId() {
+        final Todo task = new Todo("task2", false, new ArrayList<>());
+        task.setId("1");
+
+        when(todoRepository.findById(task.getId())).thenReturn(java.util.Optional.of(task));
+
+        Todo actual = todoService.getById("1");
 
         assertEquals(task, actual);
 
