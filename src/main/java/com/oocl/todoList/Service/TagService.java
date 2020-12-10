@@ -1,5 +1,6 @@
 package com.oocl.todoList.Service;
 
+import com.oocl.todoList.Exception.TagNotFoundException;
 import com.oocl.todoList.Model.Tag;
 import com.oocl.todoList.Repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,6 @@ public class TagService {
     }
 
     public Tag getById(String tagId) {
-        return null;
+        return tagRepository.findById(tagId).orElseThrow(() -> new TagNotFoundException());
     }
 }
