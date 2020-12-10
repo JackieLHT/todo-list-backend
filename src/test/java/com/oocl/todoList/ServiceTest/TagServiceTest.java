@@ -37,4 +37,15 @@ public class TagServiceTest {
 
         assertEquals(tags,actual);
     }
+
+    @Test
+    public void should_return_specific_tag_when_getById_given_tagId() {
+        Tag tag1 = new Tag("tag1","blue");
+        tag1.setId("1");
+        when(tagRepository.findById(tag1.getId())).thenReturn(java.util.Optional.of(tag1));
+
+        Tag actual = tagService.getById("1");
+
+        assertEquals(tag1,actual);
+    }
 }
