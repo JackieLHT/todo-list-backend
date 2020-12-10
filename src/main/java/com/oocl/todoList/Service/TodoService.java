@@ -2,8 +2,11 @@ package com.oocl.todoList.Service;
 
 import com.oocl.todoList.Model.Todo;
 import com.oocl.todoList.Repository.TodoRepository;
+import com.oocl.todoList.Exception.TodoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +24,12 @@ public class TodoService {
     }
 
     public Todo getById(String todoId) {
-        return todoRepository.findById(todoId).orElse(null);
+        return todoRepository.findById(todoId).orElseThrow(() -> new TodoNotFoundException());
     }
 
     public Todo update(String todoId, Todo todoUpdate) {
-        return null;
+        Todo todo = getById(todoId);
+        todoUpdate.setId(todo.getId());
+        return todoRepository.save(todoUpdate);
     }
 }
