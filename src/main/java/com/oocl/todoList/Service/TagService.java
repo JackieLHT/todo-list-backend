@@ -22,6 +22,6 @@ public class TagService {
     }
 
     public Tag create(Tag newTag) {
-        return null;
+        return tagRepository.save(newTag);
     }
 }
