@@ -64,4 +64,18 @@ public class TodoServiceTest {
         assertEquals(task, actual);
 
     }
+
+    @Test
+    public void should_return_updated_todo_when_update_given_todoId_and_request_info() {
+        final Todo task = new Todo("task2", false, new ArrayList<>());
+        task.setId("1");
+        final Todo expected = new Todo("task2 editted", false, new ArrayList<>());
+
+        when(todoRepository.save(task)).thenReturn(task);
+
+        Todo actual = todoService.update("1",expected);
+
+        assertEquals(expected, actual);
+
+    }
 }

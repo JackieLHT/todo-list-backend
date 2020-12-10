@@ -23,4 +23,8 @@ public class TodoService {
     public Todo getById(String todoId) {
         return todoRepository.findById(todoId).orElse(null);
     }
+
+    public Todo update(String todoId, Todo todoUpdate) {
+        return null;
+    }
 }
