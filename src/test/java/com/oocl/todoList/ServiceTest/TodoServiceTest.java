@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TodoServiceTest {
@@ -81,6 +81,19 @@ public class TodoServiceTest {
         assertEquals(expected.getText(), actual.getText());
         assertEquals(expected.isDone(), actual.isDone());
         assertEquals(expected.getTagIds(), actual.getTagIds());
+
+    }
+
+    @Test
+    public void should_delete_todo_when_delete_given_todoId() {
+        final Todo task = new Todo("task2", false, new ArrayList<>());
+        task.setId("1");
+
+        when(todoRepository.findById("1")).thenReturn(Optional.of(task));
+
+        todoService.delete("1");
+        //then
+        verify(todoRepository, times(1)).deleteById("1");
 
     }
 }

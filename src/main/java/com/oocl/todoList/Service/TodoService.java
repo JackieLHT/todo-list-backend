@@ -32,4 +32,9 @@ public class TodoService {
         todoUpdate.setId(todo.getId());
         return todoRepository.save(todoUpdate);
     }
+
+    public void delete(String todoId) {
+        Todo todo = getById(todoId);
+        todoRepository.deleteById(todo.getId());
+    }
 }
