@@ -26,6 +26,8 @@ public class TagService {
     }
 
     public Tag update(String tagId, Tag tagUpdate) {
-        return null;
+        Tag tag = getById(tagId);
+        tagUpdate.setId(tag.getId());
+        return tagRepository.save(tagUpdate);
     }
 }
