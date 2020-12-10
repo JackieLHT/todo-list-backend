@@ -60,4 +60,17 @@ public class TagServiceTest {
 
         assertEquals(tag1,actual);
     }
+
+    @Test
+    public void should_return_updated_tag_when_update_given_tagId_and_request_info() {
+        Tag tag1 = new Tag("tag1","blue");
+        Tag expected = new Tag("tag1 editted","orange");
+        tag1.setId("1");
+        when(tagRepository.save(any(Tag.class))).thenReturn(expected);
+        when(tagRepository.findById(tag1.getId())).thenReturn(java.util.Optional.of(tag1));
+
+        Tag actual = tagService.update("1",expected);
+
+        assertEquals(expected,actual);
+    }
 }

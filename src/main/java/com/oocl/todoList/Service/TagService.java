@@ -24,4 +24,8 @@ public class TagService {
     public Tag create(Tag newTag) {
         return tagRepository.save(newTag);
     }
+
+    public Tag update(String tagId, Tag tagUpdate) {
+        return null;
+    }
 }
