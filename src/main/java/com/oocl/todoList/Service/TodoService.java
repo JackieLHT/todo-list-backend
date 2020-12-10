@@ -2,6 +2,7 @@ package com.oocl.todoList.Service;
 
 import com.oocl.todoList.Model.Tag;
 import com.oocl.todoList.Model.Todo;
+import com.oocl.todoList.Repository.TagRepository;
 import com.oocl.todoList.Repository.TodoRepository;
 import com.oocl.todoList.Exception.TodoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
+    @Autowired
+    private TagRepository tagRepository;
     public List<Todo> getAll() {
         return todoRepository.findAll();
     }
@@ -40,6 +45,11 @@ public class TodoService {
     }
 
     public List<Tag> getTagsByTodoId(String todoId) {
-        return null;
+        Todo todo = getById(todoId);
+        List<String> tagIds = todo.getTagIds();
+        Iterable<Tag> tags = tagRepository.findAllById(tagIds);
+        return StreamSupport
+                .stream(tags.spliterator(), false)
+                .collect(Collectors.toList());
     }
 }
