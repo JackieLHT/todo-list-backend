@@ -32,6 +32,7 @@ public class TagService {
     }
 
     public void delete(String tagId) {
-        return;
+        Tag tag = getById(tagId);
+        tagRepository.deleteById(tag.getId());
     }
 }

@@ -79,6 +79,8 @@ public class TagServiceTest {
         Tag tag1 = new Tag("tag1","blue");
         tag1.setId("1");
 
+        when(tagRepository.findById("1")).thenReturn(java.util.Optional.of(tag1));
+
         tagService.delete("1");
 
         verify(tagRepository,times(1)).deleteById("1");
