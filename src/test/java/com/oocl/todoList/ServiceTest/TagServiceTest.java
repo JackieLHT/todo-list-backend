@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TagServiceTest {
@@ -72,5 +72,15 @@ public class TagServiceTest {
         Tag actual = tagService.update("1",expected);
 
         assertEquals(expected,actual);
+    }
+
+    @Test
+    public void should_delete_tag_when_delete_given_tagId() {
+        Tag tag1 = new Tag("tag1","blue");
+        tag1.setId("1");
+
+        tagService.delete("1");
+
+        verify(tagRepository,times(1)).deleteById("1");
     }
 }
