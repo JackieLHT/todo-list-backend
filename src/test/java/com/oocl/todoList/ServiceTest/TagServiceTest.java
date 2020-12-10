@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +46,17 @@ public class TagServiceTest {
         when(tagRepository.findById(tag1.getId())).thenReturn(java.util.Optional.of(tag1));
 
         Tag actual = tagService.getById("1");
+
+        assertEquals(tag1,actual);
+    }
+
+    @Test
+    public void should_return_created_tag_when_create_given_new_tag() {
+        Tag tag1 = new Tag("tag1","blue");
+        tag1.setId("1");
+        when(tagRepository.save(any(Tag.class))).thenReturn(tag1);
+
+        Tag actual = tagService.create(tag1);
 
         assertEquals(tag1,actual);
     }

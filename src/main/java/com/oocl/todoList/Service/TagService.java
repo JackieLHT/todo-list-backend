@@ -20,4 +20,8 @@ public class TagService {
     public Tag getById(String tagId) {
         return tagRepository.findById(tagId).orElseThrow(() -> new TagNotFoundException());
     }
+
+    public Tag create(Tag newTag) {
+        return null;
+    }
 }
