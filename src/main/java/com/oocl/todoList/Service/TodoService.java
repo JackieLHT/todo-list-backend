@@ -1,5 +1,6 @@
 package com.oocl.todoList.Service;
 
+import com.oocl.todoList.Model.Tag;
 import com.oocl.todoList.Model.Todo;
 import com.oocl.todoList.Repository.TodoRepository;
 import com.oocl.todoList.Exception.TodoNotFoundException;
@@ -36,5 +37,9 @@ public class TodoService {
     public void delete(String todoId) {
         Todo todo = getById(todoId);
         todoRepository.deleteById(todo.getId());
+    }
+
+    public List<Tag> getTagsByTodoId(String todoId) {
+        return null;
     }
 }
