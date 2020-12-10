@@ -9,15 +9,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TodoMapper {
-    @Autowired
-
     public Todo toEntity(TodoRequest todoRequest) {
         Todo todo = new Todo();
         BeanUtils.copyProperties(todoRequest,todo);
         return todo;
     }
 
-    public TodoResponse todoResponse(Todo todo) {
+    public TodoResponse toResponse(Todo todo) {
         TodoResponse todoResponse = new TodoResponse();
         BeanUtils.copyProperties(todo,todoResponse);
         return todoResponse;

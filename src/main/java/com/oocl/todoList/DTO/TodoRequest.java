@@ -1,14 +1,16 @@
 package com.oocl.todoList.DTO;
 
+import java.util.List;
+
 public class TodoRequest {
     private String text;
     private boolean done;
-    private String[] tags;
+    private List<String> tagIds;
 
-    public TodoRequest(String text, boolean done, String[] tags) {
+    public TodoRequest(String text, boolean done, List<String> tagIds) {
         this.text = text;
         this.done = done;
-        this.tags = tags;
+        this.tagIds = tagIds;
     }
 
     public String getText() {
@@ -27,11 +29,11 @@ public class TodoRequest {
         this.done = done;
     }
 
-    public String[] getTags() {
-        return tags;
+    public List<String> getTagIds() {
+        return tagIds;
     }
 
-    public void setTags(String[] tags) {
-        this.tags = tags;
+    public void setTagIds(List<String> tagIds) {
+        this.tagIds = tagIds;
     }
 }

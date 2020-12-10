@@ -1,10 +1,10 @@
 package com.oocl.todoList.Controller;
 
+import com.oocl.todoList.DTO.TagRequest;
 import com.oocl.todoList.DTO.TagResponse;
-import com.oocl.todoList.DTO.TodoResponse;
-import com.oocl.todoList.Mapper.TodoMapper;
-import com.oocl.todoList.Model.Todo;
-import com.oocl.todoList.Service.TodoService;
+import com.oocl.todoList.Mapper.TagMapper;
+import com.oocl.todoList.Model.Tag;
+import com.oocl.todoList.Service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,23 +12,39 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/tags")
+@CrossOrigin
 public class TagController {
     @Autowired
-    private TodoService todoService;
+    private TagService tagService;
     @Autowired
-    private TodoMapper todoMapper;
+    private TagMapper tagMapper;
 
     @GetMapping
-    public List<TodoResponse> getTodos() {
-        return todoService.getAll().stream().map(todoMapper::todoResponse).collect(Collectors.toList());
+    public List<TagResponse> getAll() {
+        return tagService.getAll().stream().map(tagMapper::toResponse).collect(Collectors.toList());
     }
 
-    @GetMapping("/{todoId}")
-    public TodoResponse getById(@PathVariable String todoId) {
-        Todo todo = todoService.getById(todoId);
-        return null;
-//        List<TagResponse> todoTags =
+    @GetMapping("/{tagId}")
+    public TagResponse getById(@PathVariable String tagId) {
+        return tagMapper.toResponse(tagService.getById(tagId));
+    }
+
+    @PostMapping
+    public TagResponse create(@RequestBody TagRequest tagRequest) {
+        Tag newTag = tagService.create(tagMapper.toEntity(tagRequest));
+        return tagMapper.toResponse(newTag);
+    }
+
+    @PutMapping("/{tagId}")
+    public TagResponse update(@PathVariable String tagId, @RequestBody TagRequest tagUpdate) {
+        Tag tag = tagService.update(tagId, tagMapper.toEntity(tagUpdate));
+        return tagMapper.toResponse(tag);
+    }
+
+    @DeleteMapping("/{tagId}")
+    public void delete(@PathVariable String tagId) {
+        tagService.delete(tagId);
     }
 
 }

@@ -1,14 +1,18 @@
 package com.oocl.todoList.DTO;
 
+import com.oocl.todoList.Model.Tag;
+
+import java.util.List;
+
 public class TodoResponse {
     private String id;
     private String text;
     private boolean done;
-    private String[] tags;
+    private List<TagResponse> tags;
 
     public TodoResponse() {}
 
-    public TodoResponse(String id, String text, boolean done, String[] tags) {
+    public TodoResponse(String id, String text, boolean done, List<TagResponse> tags) {
         this.id = id;
         this.text = text;
         this.done = done;
@@ -39,11 +43,11 @@ public class TodoResponse {
         this.done = done;
     }
 
-    public String[] getTags() {
+    public List<TagResponse> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<TagResponse> tags) {
         this.tags = tags;
     }
 }
