@@ -37,4 +37,16 @@ public class TodoServiceTest {
         assertEquals(todos, actual);
 
     }
+
+    @Test
+    public void should_return_new_todo_when_addTodo_given_new_todo() {
+        final Todo task = new Todo("task2", false);
+
+        when(todoRepository.save(task)).thenReturn(task);
+
+        List<Todo> actual = todoService.addTodo(task);
+
+        assertEquals(task, actual);
+
+    }
 }
