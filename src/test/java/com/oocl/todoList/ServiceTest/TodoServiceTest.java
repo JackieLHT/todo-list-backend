@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class TodoServiceTest {
 
     @Test
     public void should_return_all_todos_when_getAll_given_all_todos() {
-        final Todo task1 = new Todo("task1", false);
-        final Todo task2 = new Todo("task2", false);
+        final Todo task1 = new Todo("task1", false,new ArrayList<>());
+        final Todo task2 = new Todo("task2", false,new ArrayList<>());
         final List<Todo> todos = new ArrayList<>();
         todos.add(task1);
         todos.add(task2);
@@ -40,11 +41,12 @@ public class TodoServiceTest {
 
     @Test
     public void should_return_new_todo_when_addTodo_given_new_todo() {
-        final Todo task = new Todo("task2", false);
+        final Todo task = new Todo("task2", false, new ArrayList<>());
+        task.setId("1");
 
         when(todoRepository.save(task)).thenReturn(task);
 
-        List<Todo> actual = todoService.addTodo(task);
+        Todo actual = todoService.addTodo(task);
 
         assertEquals(task, actual);
 

@@ -4,19 +4,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.util.List;
+
 @Document
 public class Todo {
     @MongoId(FieldType.OBJECT_ID)
     private String id;
     private String text;
     private boolean done;
-    private String[] tags;
+    private List<String> tagIds;
 
     public Todo() {}
 
-    public Todo(String text, boolean done) {
+    public Todo(String text, boolean done, List<String> tagIds) {
         this.text = text;
         this.done = done;
+        this.tagIds = tagIds;
     }
 
     public String getId() {
@@ -43,12 +46,12 @@ public class Todo {
         this.done = done;
     }
 
-    public String[] getTags() {
-        return tags;
+    public List<String> getTagIds() {
+        return tagIds;
     }
 
-    public void setTags(String[] tags) {
-        this.tags = tags;
+    public void setTagIds(List<String> tagIds) {
+        this.tagIds = tagIds;
     }
 
     @Override
@@ -62,6 +65,6 @@ public class Todo {
         }
 
         final Todo other = (Todo) obj;
-        return this.id.equals(other.id) && this.text.equals(other.text) && this.done == other.done && this.tags.equals(other.tags);
+        return this.id.equals(other.id) && this.text.equals(other.text) && this.done == other.done && this.tagIds.equals(other.tagIds);
     }
 }
